@@ -42,7 +42,7 @@ public class Product {
 
     @Lob
     @Column(name = "product_image")
-    private byte[] productImage; // Imagen del producto.
+    private byte[] product_image; // Imagen del producto.
 
     @CreationTimestamp
     @Column(name="created_at", nullable = false, updatable = false)
