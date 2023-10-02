@@ -260,7 +260,7 @@ botonesCategorias.forEach(boton => {
         if(e.currentTarget.id != "Todos") {
             const productoCategoria = productos.find(producto => producto.categoria.id === e.currentTarget.id);
             tituloPrincipal.innerText = productoCategoria.categoria.nombre;
-            const productosBoton = productos.filter(producto => producto.categoria.id === e.currentTarget.id);
+            const productosBoton = productos.filter(producto => producto.categoria.id === e.currentTarget.id);g
             cargarProductos(productosBoton);
 
             // Ocultar el div del buscador
