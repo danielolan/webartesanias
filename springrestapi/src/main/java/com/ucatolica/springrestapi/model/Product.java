@@ -40,6 +40,10 @@ public class Product {
     @NotNull(message ="product price should not be null")
     private Long product_price; //Precio del producto.
 
+    @Lob
+    @Column(name = "product_image")
+    private byte[] productImage; // Imagen del producto.
+
     @CreationTimestamp
     @Column(name="created_at", nullable = false, updatable = false)
     private Date created_at; //Fecha de creación del producto.
