@@ -184,12 +184,35 @@ const productos = [
         precio: 1000
     }
 ];
+const contenedorProductos = document.querySelector("#contenedor-productos");
+const botonesCategorias = document.querySelectorAll(".boton-categoria");
+const tituloPrincipal = document.querySelector("#titulo-principal");
 
 fetch('http://localhost:8081/api/products')
   .then(response => response.json())
-  .then(data => console.log(data))
+  .then(data => {
+    cargarProductosback(data)
+  })
   .catch(error => console.error('Error fetching data:', error));
 
+  function cargarProductosback(productosElegidos){ 
+    contenedorProductos.innerHTML= ""
+console.log("me esta llegando" , productosElegidos)
+    productosElegidos.forEach(producto => {
+        const div = document.createElement("div");
+        div.classList.add("producto");
+        div.innerHTML= `
+                    <img class="producto-imagen" src="${producto.product_image}" alt="${producto.productName}">
+                    <div class="producto-detalles">
+                        <h3 class="producto-titulo">${producto.productName}</h3>
+                        <p class="producto-precio">${producto.product_price}</p>
+                        <button class="producto-agregar" id="${producto.id}">Agregar</button>
+                    </div>
+        ` ;
+
+        contenedorProductos.append(div);
+    })
+}
 
 /*[
     {
@@ -205,9 +228,7 @@ fetch('http://localhost:8081/api/products')
     }
 
 */
-const contenedorProductos = document.querySelector("#contenedor-productos");
-const botonesCategorias = document.querySelectorAll(".boton-categoria");
-const tituloPrincipal = document.querySelector("#titulo-principal");
+/*
 function cargarProductos(productosElegidos){ 
     contenedorProductos.innerHTML= ""
 
@@ -227,8 +248,10 @@ function cargarProductos(productosElegidos){
     })
 }
 cargarProductos(productos);
-const divBuscador = document.querySelector(".fondo");
 
+
+*/
+const divBuscador = document.querySelector(".fondo");
 botonesCategorias.forEach(boton => {
     boton.addEventListener("click", (e) => {
         botonesCategorias.forEach(boton => boton.classList.remove("active"))
