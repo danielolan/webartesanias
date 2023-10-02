@@ -184,6 +184,27 @@ const productos = [
         precio: 1000
     }
 ];
+
+fetch('http://localhost:8081/api/products')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error fetching data:', error));
+
+
+/*[
+    {
+        "id": 1,
+        "productName": "pantalon",
+        "product_ean_code": 24546456465,
+        "product_brand": "hombre",
+        "product_description": "ropa",
+        "product_inventory": 50,
+        "product_price": 2000,
+        "created_at": "2023-10-02T04:19:43.369+00:00",
+        "update_at": "2023-10-02T04:19:43.370+00:00"
+    }
+
+*/
 const contenedorProductos = document.querySelector("#contenedor-productos");
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
 const tituloPrincipal = document.querySelector("#titulo-principal");
