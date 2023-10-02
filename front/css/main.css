@@ -79,8 +79,8 @@ main {
 }
 .button-enviar{
     border: 0;
-    background-color: var(--clr-white);
-    color: var(--clr-main);
+    background-color: var(--clr-main);
+    color: var(--clr-white);
     padding: 0.5rem;
     border-radius: 2rem;
     cursor: pointer;
