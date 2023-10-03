@@ -44,9 +44,6 @@ public class Purchase {
     @NotNull(message ="purchase total should not be null")
     private Long purchase_total;
 
-    @NotNull(message ="customer address should not be null")
-    private String customer_address;
-
     @CreationTimestamp
     @Column(name="created_at", nullable = false, updatable = false)
     private Date created_at;
