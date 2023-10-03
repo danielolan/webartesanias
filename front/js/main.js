@@ -195,23 +195,22 @@ fetch('http://localhost:8081/api/products')
   })
   .catch(error => console.error('Error fetching data:', error));
 
-  function cargarProductosback(productosElegidos){ 
-    contenedorProductos.innerHTML= ""
-console.log("me esta llegando" , productosElegidos)
+  function cargarProductosback(productosElegidos) {
+    contenedorProductos.innerHTML = "";
+    console.log("me esta llegando", productosElegidos);
     productosElegidos.forEach(producto => {
         const div = document.createElement("div");
         div.classList.add("producto");
-        div.innerHTML= `
-                    <img class="producto-imagen" src="${producto.product_image}" alt="${producto.productName}">
-                    <div class="producto-detalles">
-                        <h3 class="producto-titulo">${producto.productName}</h3>
-                        <p class="producto-precio">${producto.product_price}</p>
-                        <button class="producto-agregar" id="${producto.id}">Agregar</button>
-                    </div>
-        ` ;
-
+        div.innerHTML = `
+            <img class="producto-imagen" src="${producto.product_image}" alt="${producto.productName}">
+            <div class="producto-detalles">
+                <h3 class="producto-titulo">${producto.productName}</h3>
+                <p class="producto-precio">${producto.product_price}</p>
+                <button class="producto-agregar" id="${producto.id}">Agregar</button>
+            </div>
+        `;
         contenedorProductos.append(div);
-    })
+    });
 }
 
 /*[
@@ -274,10 +273,23 @@ botonesCategorias.forEach(boton => {
         }
     })
 });
-const inputBuscar = document.querySelector("#input-buscar");
+const inputBuscar = document.getElementById('input-buscar');
+ // Asegúrate de que este ID exista en tu HTML
 
-inputBuscar.addEventListener("keyup", () => {
-    const texto = inputBuscar.value.toLowerCase();
-    const productosFiltrados = productos.filter(producto => producto.titulo.toLowerCase().includes(texto));
-    cargarProductos(productosFiltrados);
+// Evento para detectar cuando el usuario escribe en el campo de búsqueda
+inputBuscar.addEventListener('input', function() {
+    const textoBusqueda = inputBuscar.value.toLowerCase(); // Convertir el texto a minúsculas para una búsqueda no sensible a mayúsculas/minúsculas
+
+    fetch('http://localhost:8081/api/products')
+        .then(response => response.json())
+        .then(data => {
+            // Filtrar los productos basados en el texto de búsqueda y el código EAN
+            const productosFiltrados = data.filter(producto => 
+                producto.productName.toLowerCase().includes(textoBusqueda) ||
+                producto.product_ean_code.toString().includes(textoBusqueda)
+            );
+            cargarProductosback(productosFiltrados);
+        })
+        .catch(error => console.error('Error fetching data:', error));
 });
+
