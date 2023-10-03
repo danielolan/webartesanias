@@ -193,6 +193,7 @@ main {
 .producto-imagen {
     max-width: 100%;
     border-radius: 1rem;
+    cursor: pointer;
 
 }
 
@@ -354,11 +355,11 @@ input{
     justify-content: center; /* Esto centrará horizontalmente el contenido */
     align-items: center; 
     width: 60px;
-    height: 40px;
+    height: 60px;
     background: #EEEEEE;
     border-radius: 8px;
     padding: 10px 20px;
-    box-shadow: 0 0px 8px rgba(0,0,0, 3);
+    box-shadow: 0 0px 5px rgba(0,0,0, 3);
     transition: .5s ease;
     margin-bottom: 15px;
 }

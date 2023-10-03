@@ -209,6 +209,12 @@ fetch('http://localhost:8081/api/products')
                 <button class="producto-agregar" id="${producto.id}">Agregar</button>
             </div>
         `;
+
+        // Agregar evento de clic al div del producto
+        div.addEventListener('click', () => {
+            window.location.href = `product.html?productId=${producto.id}`;
+        });
+
         contenedorProductos.append(div);
     });
 }
@@ -222,6 +228,7 @@ fetch('http://localhost:8081/api/products')
         "product_description": "ropa",
         "product_inventory": 50,
         "product_price": 2000,
+        "product_image"
         "created_at": "2023-10-02T04:19:43.369+00:00",
         "update_at": "2023-10-02T04:19:43.370+00:00"
     }
