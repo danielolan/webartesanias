@@ -89,6 +89,18 @@ main {
     width: 300px;
     
 }
+.titulo-comentarios{
+    border: 0;
+    background-color: var(--clr-main);
+    color: var(--clr-white);
+    padding: 0.5rem;
+    margin-top: 20px;
+    border-radius: 2rem;
+    cursor: pointer;
+    border: 2px solid var(--clr-white);
+    transition: background-color .2s, color .2s;
+    width: 300px;
+}
 .boton-menu {
     background-color: transparent;
     border: 0;
@@ -104,7 +116,9 @@ main {
     width: 100%;
 
 }
-
+.imagen-product{
+    border-radius: 1rem;
+}
 
 .boton-categoria {}
 
@@ -128,7 +142,10 @@ main {
     transform: rotateZ(90deg);
 }
 
-
+.contenedor-productounitario{
+    background-color:var(--clr-main);
+    border-radius: 1rem;
+}
 .boton-carrito {
     margin-top: 2rem;
 }
