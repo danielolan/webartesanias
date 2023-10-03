@@ -5,6 +5,7 @@ import com.ucatolica.springrestapi.repository.CommentRepository;
 import com.ucatolica.springrestapi.service.CommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,11 +16,16 @@ public class CommentsServiceImpl implements CommentsService {
     @Autowired
     private CommentRepository commentRepository;
 
+
     @Override
     public List<Comment> getAllComments() {
-        return commentRepository.findAll();
-    }
+        // Crear un objeto Sort para ordenar los comentarios por fecha de
+        // creación en orden descendente (del más reciente al menos reciente)
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
 
+        // Utilizar el método findAll con el objeto Sort
+        return commentRepository.findAll(sort);
+    }
     @Override
     public Comment createComment(Comment comment) {
         return commentRepository.save(comment);

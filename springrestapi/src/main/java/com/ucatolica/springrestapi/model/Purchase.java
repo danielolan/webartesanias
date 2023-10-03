@@ -35,6 +35,12 @@ public class Purchase {
     @NotNull(message ="shipmen date should not be null")
     private Date shipment_date;
 
+    @NotNull(message ="unit price should not be null")
+    private Long unit_price;
+
+    @NotNull(message ="purchase subtotal should not be null")
+    private Long purchase_sub_total;
+
     @NotNull(message ="purchase total should not be null")
     private Long purchase_total;
 
