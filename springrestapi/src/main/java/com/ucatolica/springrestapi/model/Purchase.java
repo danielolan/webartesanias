@@ -44,6 +44,10 @@ public class Purchase {
     @NotNull(message ="purchase total should not be null")
     private Long purchase_total;
 
+    @OneToOne
+    @JoinColumn(name = "delivery_address_id")
+    private DeliveryAddress deliveryAddress;
+
     @CreationTimestamp
     @Column(name="created_at", nullable = false, updatable = false)
     private Date created_at;

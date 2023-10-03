@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de Envío - CarpiShop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1 class="logo">DBTShop</h1>
+    </header>
+    <main>
+        <form action="procesar-informacion-envio" method="POST">
+            <h2>Información de Envío</h2>
+            <!-- Campos heredados o prellenados desde la página de compra -->
+            <div>
+                <label for="user_id">Usuario:</label>
+                <input type="text" id="user_id" name="user_id" value="UsuarioActual" disabled>
+            </div>
+            <div>
+                <label for="purchase_id">Compra ID:</label>
+                <input type="text" id="purchase_id" name="purchase_id" value="IDCompra" disabled>
+            </div>
+            <!-- Campos para completar durante la información de envío -->
+            <div>
+                <label for="city">Ciudad:</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+            <div>
+                <label for="address">Dirección:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div>
+                <label for="delivery_price">Precio de Envío:</label>
+                <input type="text" id="delivery_price" name="delivery_price" required value="$10.000" disabled>
+            </div>
+            <!-- Botón para confirmar la información de envío -->
+            <div>
+                <button type="submit">Confirmar Información de Envío</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p class="texto-footer">© DBTShop Store Online</p>
+    </footer>
+</body>
+</html>

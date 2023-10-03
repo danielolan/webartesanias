@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra - CarpiShop</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <header>
+        <h1 class="logo">DBTShop</h1>
+    </header>
+    <main>
+        
+        <form action="procesar-compra" method="POST">
+            <h2>Compra</h2>
+            <!-- Campos heredados o prellenados desde el carrito de compras -->
+            <div>
+                <label for="user_id">Usuario:</label>
+                <input type="text" id="user_id" name="user_id" value="UsuarioActual" disabled>
+            </div>
+            <div>
+                <label for="purchase_total">Total de la compra:</label>
+                <input type="text" id="purchase_total" name="purchase_total" value="TotalDelCarrito" disabled>
+            </div>
+            <!-- Campos para completar durante la compra -->
+            <div>
+                <label for="payment_id">Método de Pago:</label>
+                <select id="payment_id" name="payment_id">
+                    <option value="1">Tarjeta de Crédito</option>
+                    <option value="2">PayPal</option>
+                    <!-- Agrega opciones de métodos de pago -->
+                </select>
+            </div>
+            <div>
+                <label for="purchase_date">Fecha de Compra:</label>
+                <input type="date" id="purchase_date" name="purchase_date" required>
+            </div>
+            <div>
+                <label for="shipment_date">Fecha de Envío:</label>
+                <input type="date" id="shipment_date" name="shipment_date" required>
+            </div>
+            <!-- Botón para completar la compra -->
+            <div>
+                <button type="submit">Continuar</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p class="texto-footer">© DBTShop Store Online</p>
+    </footer>
+</body>
+</html>
