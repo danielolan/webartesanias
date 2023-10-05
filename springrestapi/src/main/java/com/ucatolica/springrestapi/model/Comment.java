@@ -32,6 +32,6 @@ public class Comment {
     private Product product;
 
     @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date created_at; // Fecha de creación del comentario del producto.
+    @Column(name = "createdAt", nullable = false, updatable = false)
+    private Date createdAt; // Fecha de creación del comentario del producto.
 }
