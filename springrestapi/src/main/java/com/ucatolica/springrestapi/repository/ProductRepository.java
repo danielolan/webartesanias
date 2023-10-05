@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repositorio que gestiona las operaciones de base de datos para los productos (Product).
+ */
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

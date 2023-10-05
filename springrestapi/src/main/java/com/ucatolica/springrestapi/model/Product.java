@@ -16,6 +16,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Clase que representa un producto.
+ */
 @Setter
 @Getter
 @ToString

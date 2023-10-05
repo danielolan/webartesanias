@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Clase que representa una ubicación en la aplicación.
+ */
 @Setter
 @Getter
 @ToString

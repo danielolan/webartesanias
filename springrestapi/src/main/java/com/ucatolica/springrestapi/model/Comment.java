@@ -10,29 +10,28 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
+/**
+ * Clase que representa un comentario del producto.
+ */
 @Setter
 @Getter
 @ToString
 @Entity
-@Table(name="tbl_comments")
+@Table(name = "tbl_comments")
 public class Comment {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "El campo 'contenido' no debe ser nulo")
-    private String contenido;
+    @NotNull(message = "The description field must not be null")
+    private String description;
 
     @ManyToOne
-    @JoinColumn(name = "producto_id")
-    private Product producto;
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @CreationTimestamp
-    @Column(name="created_at", nullable = false, updatable = false)
-    private Date created_at; //Fecha de creación del comenatrio del producto.
-
-
-
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date created_at; // Fecha de creación del comentario del producto.
 }

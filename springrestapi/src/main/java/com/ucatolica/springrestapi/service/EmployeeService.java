@@ -4,25 +4,54 @@ import com.ucatolica.springrestapi.model.Employee;
 
 import java.util.List;
 
+/**
+ * Interfaz que define los métodos para el servicio de empleados (Employee).
+ */
 public interface EmployeeService {
 
-    //Consultar
+    /**
+     * Obtiene todos los empleados.
+     *
+     * @return Una lista de todos los empleados.
+     */
     List<Employee> getEmployees();
 
-    //Guardar
+    /**
+     * Guarda un empleado.
+     *
+     * @param employee El empleado a guardar.
+     * @return El empleado guardado.
+     */
     Employee saveEmployee(Employee employee);
 
-    //Conssultar por id
-    Employee getSingleEmployee (Long id);
+    /**
+     * Obtiene un único empleado por su ID.
+     *
+     * @param id El ID del empleado a obtener.
+     * @return El empleado encontrado o null si no se encuentra.
+     */
+    Employee getSingleEmployee(Long id);
 
-    //Eliminar
-    void deleteEmployee (Long id);
+    /**
+     * Elimina un empleado por su ID.
+     *
+     * @param id El ID del empleado a eliminar.
+     */
+    void deleteEmployee(Long id);
 
-    //Actualizar
-    Employee updateEmployee (Employee employee);
+    /**
+     * Actualiza un empleado.
+     *
+     * @param employee El empleado a actualizar.
+     * @return El empleado actualizado.
+     */
+    Employee updateEmployee(Employee employee);
 
-    //Filtar por nombre
+    /**
+     * Obtiene una lista de empleados por su nombre.
+     *
+     * @param name El nombre por el cual filtrar los empleados.
+     * @return Una lista de empleados con el nombre especificado.
+     */
     List<Employee> getEmployeesByName(String name);
-
-
 }

@@ -10,7 +10,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-
+/**
+ * Clase que representa una compra.
+ */
 @Setter
 @Getter
 @ToString

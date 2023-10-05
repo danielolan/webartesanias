@@ -11,6 +11,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
+/**
+ * Clase que representa un empleado.
+ */
 @Setter
 @Getter
 @ToString
