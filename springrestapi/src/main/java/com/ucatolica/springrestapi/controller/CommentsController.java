@@ -52,15 +52,4 @@ public class CommentsController {
         return new ResponseEntity<>(cService.createComment(comment), HttpStatus.CREATED);
     }
 
-    /**
-     * Elimina un comentario por su identificador.
-     *
-     * @param id El identificador único del comentario a ser eliminado.
-     * @return Una ResponseEntity con el estado HTTP NO_CONTENT (204) después de eliminar el comentario.
-     */
-    @DeleteMapping("/comments/{id}")
-    public ResponseEntity<HttpStatus> deleteComment(@PathVariable Long id) {
-        cService.deleteComment(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }
