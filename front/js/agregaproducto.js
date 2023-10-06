@@ -17,10 +17,10 @@ document.getElementById('productForm').addEventListener('submit', function(event
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        alert('Product submitted successfully!');
+       
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Failed to submit product.');
+        
     });
 });
