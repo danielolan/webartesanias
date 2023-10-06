@@ -74,6 +74,7 @@ main {
     padding: 3rem;
     
 }
+
 .costume-input{
     border-radius: 1rem;
 }
@@ -129,6 +130,10 @@ main {
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     position: relative;
+}
+h6{
+    font-size: .85rem;
+    padding-top: 1rem;
 }
 
 .active {}
@@ -240,6 +245,7 @@ main {
 .carrito-producto-imagen {
     width: 4rem;
     border-radius: 1rem;
+    
 }
 
 
@@ -257,7 +263,9 @@ main {
     flex-direction: column;
     gap: 0.5rem;
 }
-
+.precio-text{
+    font-size: 20px;
+}
 .carrito-producto {
     display: flex;
     justify-content: space-between;
@@ -267,6 +275,17 @@ main {
     padding-right: 1.5rem;
     padding: 0.5rem;
     border-radius: 1rem;
+}
+.contenedor-comment{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--clr-gray);
+    color: var(--clr-main);
+    padding-right: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
 }
 
 .carrito-producto small {

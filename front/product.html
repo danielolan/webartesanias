@@ -41,7 +41,7 @@
             
             <h2 class="titulo-principal mb-4">DBTShop</h2>
 
-            <div class="row" id="producto-contain">
+            <div class="row" id="producto-container">
                 <!-- Imagen del producto -->
 
             </div>
@@ -53,31 +53,14 @@
                 <!-- Espacio para escribir un comentario -->
                 <div class="mb-4">
                     <h5>Escribe tu comentario:</h5>
-                    <textarea class="form-control mb-3" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+                    <textarea class="form-control mb-3" rows="4" placeholder="Escribe tu comentario aquí..." id="userComment"></textarea>
                     <button class="btn btn-primary button-enviar">Enviar comentario</button>
                 </div>
+                
 
                 <!-- Comentarios existentes -->
-                <div class="mt-5">
-                    <!-- Ejemplo de comentario 1 -->
-                    <div class="media mb-4 carrito-producto">
-                        <img src="https://via.placeholder.com/64" alt="Imagen de usuario" class="mr-3 rounded-circle">
-                        <div class="media-body">
-                            <h5 class="mt-0">Nombre del usuario</h5>
-                            ¡Me encanta este producto! Llegó en perfecto estado y es justo lo que esperaba.
-                        </div>
-                    </div>
-
-                    <!-- Ejemplo de comentario 2 -->
-                    <div class="media mb-4 carrito-producto">
-                        <img src="https://via.placeholder.com/64" alt="Imagen de usuario" class="mr-3 rounded-circle">
-                        <div class="media-body">
-                            <h5 class="mt-0">Nombre del usuario</h5>
-                            El envío fue rápido, pero el producto no cumplió con mis expectativas.
-                        </div>
-                    </div>
-
-                    <!-- Puedes agregar más comentarios siguiendo el mismo formato -->
+                <div class="mt-5" id="contenedor-comentarios">
+              
                 </div>
             </section>
 
