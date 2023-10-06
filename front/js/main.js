@@ -281,7 +281,7 @@ botonesCategorias.forEach(boton => {
     })
 });
 const inputBuscar = document.getElementById('input-buscar');
- // Asegúrate de que este ID exista en tu HTML
+// Asegúrate de que este ID exista en tu HTML
 
 // Evento para detectar cuando el usuario escribe en el campo de búsqueda
 inputBuscar.addEventListener('input', function() {
@@ -290,10 +290,15 @@ inputBuscar.addEventListener('input', function() {
     fetch('http://localhost:8081/api/products')
         .then(response => response.json())
         .then(data => {
-            // Filtrar los productos basados en el texto de búsqueda y el código EAN
+            // Filtrar los productos basados en el texto de búsqueda y los campos mencionados
             const productosFiltrados = data.filter(producto => 
                 producto.productName.toLowerCase().includes(textoBusqueda) ||
-                producto.product_ean_code.toString().includes(textoBusqueda)
+                producto.product_ean_code.toString().includes(textoBusqueda) ||
+                producto.id.toString().includes(textoBusqueda) ||
+                producto.product_brand.toLowerCase().includes(textoBusqueda) ||
+                producto.product_description.toLowerCase().includes(textoBusqueda) ||
+                producto.product_inventory.toString().includes(textoBusqueda) ||
+                producto.product_price.toString().includes(textoBusqueda)
             );
             cargarProductosback(productosFiltrados);
         })
