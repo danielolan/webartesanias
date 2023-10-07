@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         if (userInfo.isPresent()) {
             return userInfo.get();
         }
-        throw new RuntimeException("Usuario no encontrado por ID: " + id);
+        throw new RuntimeException("User not found by ID: " + id);
     }
 
     /**
