@@ -196,12 +196,13 @@ h6{
 .producto {}
 
 .producto-imagen {
-    max-width: 100%;
-    
+    width: 100%; /* o el valor que desees */
+    height: 300px;/* o el valor que desees */
     border-radius: 1rem;
     cursor: pointer;
-
+    object-fit: cover;
 }
+
 
 .producto-detalles {
     background-color: var(--clr-main);
