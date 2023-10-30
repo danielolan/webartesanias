@@ -1,16 +1,12 @@
 package com.ucatolica.springrestapi.model;
 
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,6 +47,9 @@ public class Product {
     @NotNull(message = "product image code should not be null")
     @Column(name = "product_image")
     private String product_image; // Imagen del producto.
+
+    @OneToMany(mappedBy = "product")
+    private List<Purchase> purchases;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

@@ -24,8 +24,6 @@ public class DeliveryAddress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long add_id;
 
-    private Long user_id;
-
     @NotNull(message = "The city should not be null")
     private String city;
 
@@ -34,6 +32,10 @@ public class DeliveryAddress {
 
     @NotNull(message = "The delivery price must not be zero")
     private Long delivery_price;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

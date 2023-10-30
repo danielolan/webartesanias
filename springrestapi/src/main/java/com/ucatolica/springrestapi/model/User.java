@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.List;
+
 /**
  * Clase que representa un usuario en la aplicación.
  */
@@ -38,6 +40,12 @@ public class User {
 
     @jakarta.validation.constraints.Email(message ="Please enter correct email")
     private String user_email;
+
+    @OneToMany(mappedBy = "user")
+    private List<DeliveryAddress> deliveryAddresses;
+
+    @OneToMany(mappedBy = "user")
+    private List<Purchase> purchases;
 
     @CreationTimestamp
     @Column(name="created_at", nullable = false, updatable = false)
