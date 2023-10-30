@@ -188,36 +188,79 @@ const contenedorProductos = document.querySelector("#contenedor-productos");
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
 const tituloPrincipal = document.querySelector("#titulo-principal");
 
+let currentPage = 1;
+const itemsPerPage = 8;
+let totalItems;
+
 fetch('http://localhost:8081/api/products')
-  .then(response => response.json())
-  .then(data => {
-    cargarProductosback(data)
-  })
-  .catch(error => console.error('Error fetching data:', error));
+    .then(response => response.json())
+    .then(data => {
+        productosElegidos = data;
+        cargarProductosback(productosElegidos, currentPage);
+        crearPaginacion(productosElegidos.length);
+    })
+    .catch(error => console.error('Error fetching data:', error));
 
-  function cargarProductosback(productosElegidos) {
-    contenedorProductos.innerHTML = "";
-    console.log("me esta llegando", productosElegidos);
-    productosElegidos.forEach(producto => {
-        const div = document.createElement("div");
-        div.classList.add("producto");
-        div.innerHTML = `
-            <img class="producto-imagen" src="${producto.product_image}" alt="${producto.productName}">
-            <div class="producto-detalles">
-                <h3 class="producto-titulo">${producto.productName}</h3>
-                <p class="producto-precio">${producto.product_price}</p>
-                <button class="producto-agregar" id="${producto.id}">Agregar</button>
-            </div>
-        `;
 
-        // Agregar evento de clic al div del producto
-        div.addEventListener('click', () => {
-            window.location.href = `product.html?productId=${producto.id}`;
+    function cargarProductosback(productosElegidos, pagina) {
+        const startIndex = (pagina - 1) * itemsPerPage;
+        const endIndex = pagina * itemsPerPage;
+        contenedorProductos.innerHTML = "";  // Limpiar el contenedor de productos
+    
+        // Utilizar slice para obtener solo los productos de la página actual
+        const productosPaginaActual = productosElegidos.slice(startIndex, endIndex);
+    
+        console.log("me esta llegando", productosPaginaActual);  // Log de los productos de la página actual
+    
+        productosPaginaActual.forEach(producto => {
+            const div = document.createElement("div");
+            div.classList.add("producto");
+            div.innerHTML = `
+                <img class="producto-imagen" src="${producto.product_image}" alt="${producto.productName}">
+                <div class="producto-detalles">
+                    <h3 class="producto-titulo">${producto.productName}</h3>
+                    <p class="producto-precio">${producto.product_price}</p>
+                    <button class="producto-agregar" id="${producto.id}">Agregar</button>
+                </div>
+            `;
+    
+            // Agregar evento de clic al div del producto
+            div.addEventListener('click', () => {
+                window.location.href = `product.html?productId=${producto.id}`;
+            });
+    
+            contenedorProductos.append(div);  // Agregar el producto al contenedor de productos
         });
+    }
+    
+    function crearPaginacion(totalProductos) {
+        const totalPages = Math.ceil(totalProductos / itemsPerPage);
+        const paginationDiv = document.createElement('div');
+        paginationDiv.classList.add('pagination');
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.innerText = i;
+            pageButton.addEventListener('click', () => {
+                currentPage = i;
+                cargarProductosback(productosElegidos, currentPage);
+            });
+            paginationDiv.append(pageButton);
+        }
+        
+        // Buscar el elemento main
+        const mainElement = document.querySelector('main');
+    
+        // Asegúrate de que el div de paginación se coloque solo una vez
+        const existingPaginationDiv = mainElement.querySelector('.pagination');
+        if (existingPaginationDiv) {
+            mainElement.replaceChild(paginationDiv, existingPaginationDiv);
+        } else {
+            mainElement.append(paginationDiv);
+        }
+    }
+    
 
-        contenedorProductos.append(div);
-    });
-}
+
 
 /*[
     {
