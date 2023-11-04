@@ -10,32 +10,53 @@ fetch(`http://localhost:8081/api/products/${productId}`)
     })
     .catch(error => console.error('Error fetching product details:', error));
 
-function cargarProducto(producto) {
-    contenedorProductos.innerHTML = "";
-
-    const div = document.createElement("div");
-    div.classList.add("row");
-    div.innerHTML = `
-        <div class="col-md-6">
-            <img src="${producto.product_image}" alt="Imagen del producto" class="img-fluid imagen-product">
-        </div>
+    function cargarProducto(producto) {
+        contenedorProductos.innerHTML = "";
     
-        <div class="col-md-6">
-            <h3 class="mb-3">${producto.productName}</h3>
-            <p><strong>Código EAN:</strong> ${producto.product_ean_code}</p>
-            <p><strong>Marca:</strong> ${producto.product_brand}</p>
-            <p><strong>Descripción:</strong> ${producto.product_description}</p>
-            <p><strong>Inventario:</strong> ${producto.product_inventory} unidades</p>
-            <p class="precio-text"><strong class="precio-text">Precio:</strong> $${producto.product_price}</p>
-            
-            <div class="d-flex justify-content-center g-3">
-                <button class="btn btn-primary button-enviar">Añadir al carrito</button>
+        const div = document.createElement("div");
+        div.classList.add("row");
+        div.innerHTML = `
+            <div class="col-md-6 my-3">
+                <img src="${producto.product_image}" alt="Imagen del producto" class="img-fluid imagen-product">
             </div>
-        </div>
-    `;
+        
+            <div class="col-md-6 d-flex flex-column justify-content-center my-3">
+                <h3 class="mb-3">${producto.productName}</h3>
+                <p class="my-2"><strong>Código EAN:</strong> ${producto.product_ean_code}</p>
+                <p class="my-2"><strong>Marca:</strong> ${producto.product_brand}</p>
+                <p class="my-2"><strong>Descripción:</strong> ${producto.product_description}</p>
+                <p class="unidades-disponibles my-2">${producto.product_inventory} unidades disponibles</p>
+                <p class="precio-text my-2"><strong>Precio:</strong> $${producto.product_price}</p>
+    
+                <div class="d-flex align-items-center my-4">
+                    <!-- Selector de unidades sin margen adicional -->
+                    <select class="form-select" id="cantidadProducto">
+                        ${Array.from({ length: producto.product_inventory }, (_, i) => 
+                          `<option value="${i + 1}">${i + 1}</option>`
+                        ).join('')}
+                    </select>
+                    <button class="btn btn-primary button-enviar ml-2">Añadir al carrito</button>
+                </div>
+            </div>
+        `;
+    
+        contenedorProductos.append(div);
+    }
+    
 
-    contenedorProductos.append(div);
-}
+
+    
+// Este código debería ejecutarse una vez que `contenedorProductos` esté en el DOM.
+document.addEventListener('DOMContentLoaded', () => {
+    contenedorProductos.addEventListener('click', function(e) {
+        if (e.target.classList.contains('button-enviar')) {
+            const cantidadSeleccionada = document.getElementById('cantidadProducto').value;
+            console.log('Cantidad seleccionada:', cantidadSeleccionada); // Aquí haces lo que necesitas con la cantidad
+        }
+    });
+});
+
+    
 document.querySelector('.button-enviar').addEventListener('click', function() {
     // Obtener el comentario del usuario
     const userCommentTextarea = document.getElementById('userComment');
@@ -111,3 +132,5 @@ fetch(`http://localhost:8081/api/comments`)
         cargarComentario(comentarios);
     })
     .catch(error => console.error('Error fetching product details:', error));
+
+    

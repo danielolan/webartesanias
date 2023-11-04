@@ -80,3 +80,15 @@ footer {
 
 /* Estilos adicionales específicos para cada formulario */
 /* Puedes agregar estilos específicos aquí */
+.unidades-disponibles {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 15px; /* Ajusta al margen derecho que necesites */
+    margin-top: 15px; /* Ajusta al margen superior que necesites */
+}
+
+/* Asegúrate de que el contenedor padre tenga posición relativa para que el posicionamiento absoluto funcione correctamente */
+.col-md-6.d-flex {
+    position: relative;
+}
