@@ -28,14 +28,11 @@ public class Purchase {
     @NotNull(message = "payment id should not be null")
     private Long payment_id;
 
-    @NotNull(message = "purchase date should not be null")
-    private Date purchase_date;
-
-    @NotNull(message = "shipment date should not be null")
-    private Date shipment_date;
-
     @NotNull(message = "unit price should not be null")
     private Long unit_price;
+
+    @NotNull(message = "product amount should not be null")
+    private Long amount_product;
 
     @NotNull(message = "purchase subtotal should not be null")
     private Long purchase_sub_total;
@@ -51,11 +48,4 @@ public class Purchase {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date created_at;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private Date update_at;
 }

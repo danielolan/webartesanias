@@ -49,10 +49,20 @@ fetch(`http://localhost:8081/api/products/${productId}`)
 // Este código debería ejecutarse una vez que `contenedorProductos` esté en el DOM.
 document.addEventListener('DOMContentLoaded', () => {
     contenedorProductos.addEventListener('click', function(e) {
+     
         if (e.target.classList.contains('button-enviar')) {
+            e.preventDefault(); // Prevenir la recarga por defecto del formulario
             const cantidadSeleccionada = document.getElementById('cantidadProducto').value;
-            console.log('Cantidad seleccionada:', cantidadSeleccionada); // Aquí haces lo que necesitas con la cantidad
+            
+            
+            console.log('Cantidad seleccionada:', cantidadSeleccionada);
+            console.log('Product ID:', productId);
+        
+            // Redirigir a index.html con los parámetros de consulta
+            window.location.href = `carrito.html?cantidad=${encodeURIComponent(cantidadSeleccionada)}&productId=${encodeURIComponent(productId)}`;
         }
+        
+        
     });
 });
 
