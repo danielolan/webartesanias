@@ -90,39 +90,44 @@ public class ProductController {
     }
 
     @PostMapping("/products/upload")
-    public ResponseEntity<Product> handleFileUpload(@RequestParam("product_image") MultipartFile file,
-            @RequestParam("productName") String productName,
-            @RequestParam("product_ean_code") Long productEanCode,
-            @RequestParam("product_brand") String productBrand,
-            @RequestParam("product_description") String productDescription,
-            @RequestParam("product_inventory") Long productInventory,
-            @RequestParam("product_price") Long productPrice) {
-        try {
-            // Asegúrate de que el directorio exista
-            Files.createDirectories(rootLocation);
+public ResponseEntity<Product> handleFileUpload(@RequestParam("product_image") MultipartFile file,
+        @RequestParam("productName") String productName,
+        @RequestParam("product_ean_code") Long productEanCode,
+        @RequestParam("product_brand") String productBrand,
+        @RequestParam("product_description") String productDescription,
+        @RequestParam("product_inventory") Long productInventory,
+        @RequestParam("product_price") Long productPrice) {
+    try {
+        // Asegúrate de que el directorio exista
+        Files.createDirectories(rootLocation);
 
-            // Construye la ruta del archivo y guarda el archivo
-            Path resolvePath = rootLocation.resolve(Paths.get(file.getOriginalFilename()));
-            Files.copy(file.getInputStream(), resolvePath, StandardCopyOption.REPLACE_EXISTING);
+        // Construye la ruta del archivo y guarda el archivo
+        String fileName = file.getOriginalFilename(); // Obtiene solo el nombre del archivo
+        Path resolvePath = rootLocation.resolve(Paths.get(fileName));
+        Files.copy(file.getInputStream(), resolvePath, StandardCopyOption.REPLACE_EXISTING);
 
-            // Crear y guardar el producto
-            Product product = new Product();
-            product.setProductName(productName);
-            product.setProduct_ean_code(productEanCode);
-            product.setProduct_brand(productBrand);
-            product.setProduct_description(productDescription);
-            product.setProduct_inventory(productInventory);
-            product.setProduct_price(productPrice);
-            product.setProduct_image(resolvePath.toString()); // Guardar la ruta de la imagen o algo que represente la
-                                                              // imagen
-            Product savedProduct = pService.saveProduct(product);
+        // Crear y guardar el producto
+        Product product = new Product();
+        product.setProductName(productName);
+        product.setProduct_ean_code(productEanCode);
+        product.setProduct_brand(productBrand);
+        product.setProduct_description(productDescription);
+        product.setProduct_inventory(productInventory);
+        product.setProduct_price(productPrice);
+        
+        // Aquí guardas solo la ruta relativa "./img/" junto con el nombre del archivo
+        String relativePath = "./img/" + fileName;
+        product.setProduct_image(relativePath); // Guardar la ruta relativa de la imagen
 
-            return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        Product savedProduct = pService.saveProduct(product);
+
+        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
+
 
     /**
      * Filtra los productos por nombre.
