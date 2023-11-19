@@ -2,20 +2,24 @@
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('productId');
 const contenedorProductos = document.querySelector("#producto-container");
+
+
 // Usar el productId para hacer una solicitud al backend y obtener los detalles del producto
 fetch(`http://localhost:8081/api/products/${productId}`)
     .then(response => response.json())
     .then(product => {
         cargarProducto(product);
+
+
     })
     .catch(error => console.error('Error fetching product details:', error));
 
-    function cargarProducto(producto) {
-        contenedorProductos.innerHTML = "";
-    
-        const div = document.createElement("div");
-        div.classList.add("row");
-        div.innerHTML = `
+function cargarProducto(producto) {
+    contenedorProductos.innerHTML = "";
+
+    const div = document.createElement("div");
+    div.classList.add("row");
+    div.innerHTML = `
             <div class="col-md-6 my-3">
                 <img src="${producto.product_image}" alt="Imagen del producto" class="img-fluid imagen-product">
             </div>
@@ -31,43 +35,95 @@ fetch(`http://localhost:8081/api/products/${productId}`)
                 <div class="d-flex align-items-center my-4">
                     <!-- Selector de unidades sin margen adicional -->
                     <select class="form-select" id="cantidadProducto">
-                        ${Array.from({ length: producto.product_inventory }, (_, i) => 
-                          `<option value="${i + 1}">${i + 1}</option>`
-                        ).join('')}
+                        ${Array.from({ length: producto.product_inventory }, (_, i) =>
+        `<option value="${i + 1}">${i + 1}</option>`
+    ).join('')}
                     </select>
                     <button class="btn btn-primary button-enviar ml-2">Añadir al carrito</button>
                 </div>
             </div>
         `;
-    
-        contenedorProductos.append(div);
-    }
-    
+
+    contenedorProductos.append(div);
+}
 
 
-    
-// Este código debería ejecutarse una vez que `contenedorProductos` esté en el DOM.
+
 document.addEventListener('DOMContentLoaded', () => {
-    contenedorProductos.addEventListener('click', function(e) {
-     
+    contenedorProductos.addEventListener('click', function (e) {
+
         if (e.target.classList.contains('button-enviar')) {
             e.preventDefault(); // Prevenir la recarga por defecto del formulario
             const cantidadSeleccionada = document.getElementById('cantidadProducto').value;
-            
-            
-            console.log('Cantidad seleccionada:', cantidadSeleccionada);
-            console.log('Product ID:', productId);
-        
+
+
+
+            crearproductocarrito(productId, cantidadSeleccionada)
+            console.log('aaaaaaaaaaaaaaa',cantidadSeleccionada)
+
+
             // Redirigir a index.html con los parámetros de consulta
-            window.location.href = `carrito.html?cantidad=${encodeURIComponent(cantidadSeleccionada)}&productId=${encodeURIComponent(productId)}`;
+            // window.location.href = `carrito.html?cantidad=${encodeURIComponent(cantidadSeleccionada)}&productId=${encodeURIComponent(productId)}`;
         }
-        
-        
+
+
     });
 });
 
-    
-document.querySelector('.button-enviar').addEventListener('click', function() {
+
+// Este código debería ejecutarse una vez que `contenedorProductos` esté en el DOM.
+
+
+function crearproductocarrito(productId,cantidadSeleccionada) {
+
+   
+
+    fetch(`http://localhost:8081/api/products/${productId}`)
+        .then(response => response.json())
+        .then(productcarrito => {
+            let totalproducto;
+            totalproducto =  productcarrito.product_price * cantidadSeleccionada;
+            console.log('Millso campeon',productcarrito.product_price)
+            console.log('porque 7',cantidadSeleccionada)
+            console.log('Millso campeon',totalproducto)
+
+
+            // Crear el objeto con los datos
+            let dataToSend = {
+                unit_price: productcarrito.product_price,
+                amount_product: cantidadSeleccionada,
+                purchase_total: totalproducto, // Asumiendo que solo necesitas enviar el ID del usuario
+                product: { id: productId } // Asumiendo que solo necesitas enviar el ID del producto
+            };
+
+            // Realizar la solicitud POST
+            fetch('http://localhost:8081/api/purchase', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Otros encabezados si son necesarios
+                },
+                body: JSON.stringify(dataToSend)
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+
+
+
+
+
+
+
+
+
+
+        })
+        .catch(error => console.error('Error fetching product details:', error));
+
+
+}
+document.querySelector('.button-enviar').addEventListener('click', function () {
     // Obtener el comentario del usuario
     const userCommentTextarea = document.getElementById('userComment');
     const userComment = userCommentTextarea.value;
@@ -92,23 +148,23 @@ document.querySelector('.button-enviar').addEventListener('click', function() {
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Comentario guardado:', data);
+        .then(response => response.json())
+        .then(data => {
+            console.log('Comentario guardado:', data);
 
-        // Limpiar el textarea si la petición fue exitosa
-        userCommentTextarea.value = '';
+            // Limpiar el textarea si la petición fue exitosa
+            userCommentTextarea.value = '';
 
-        // Recargar los comentarios después de agregar uno nuevo
-        return fetch(`http://localhost:8081/api/comments`);
-    })
-    .then(response => response.json())
-    .then(comentarios => {
-        cargarComentario(comentarios);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+            // Recargar los comentarios después de agregar uno nuevo
+            return fetch(`http://localhost:8081/api/comments`);
+        })
+        .then(response => response.json())
+        .then(comentarios => {
+            cargarComentario(comentarios);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 });
 
 const contenedorComentarios = document.querySelector("#contenedor-comentarios");
@@ -143,4 +199,3 @@ fetch(`http://localhost:8081/api/comments`)
     })
     .catch(error => console.error('Error fetching product details:', error));
 
-    

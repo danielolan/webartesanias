@@ -25,8 +25,7 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long purchase_id;
 
-    @NotNull(message = "payment id should not be null")
-    private Long payment_id;
+
 
     @NotNull(message = "unit price should not be null")
     private Long unit_price;
@@ -34,8 +33,6 @@ public class Purchase {
     @NotNull(message = "product amount should not be null")
     private Long amount_product;
 
-    @NotNull(message = "purchase subtotal should not be null")
-    private Long purchase_sub_total;
 
     @NotNull(message = "purchase total should not be null")
     private Long purchase_total;

@@ -22,7 +22,7 @@ public class ProductController {
     @Autowired
     private ProductService pService;
 
-    private final Path rootLocation = Paths.get("C:/Users/Daniel/Documents/aprendiendoweb/webartesanias/front/img");
+    private final Path rootLocation = Paths.get("E:/arquitectura web/codigos u/webartesanias/front/img");
 
     /**
      * Obtiene la lista de todos los productos.
