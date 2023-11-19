@@ -48,9 +48,6 @@ public class Product {
     @Column(name = "product_image")
     private String product_image; // Imagen del producto.
 
-    @OneToMany(mappedBy = "product")
-    private List<Purchase> purchases;
-
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date created_at; // Fecha de creación del producto.

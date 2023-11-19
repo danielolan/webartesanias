@@ -44,8 +44,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<DeliveryAddress> deliveryAddresses;
 
-    @OneToMany(mappedBy = "user")
-    private List<Purchase> purchases;
 
     @CreationTimestamp
     @Column(name="created_at", nullable = false, updatable = false)
