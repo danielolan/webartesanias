@@ -46,6 +46,35 @@ function cargarProducto(producto) {
 
     contenedorProductos.append(div);
 }
+function mostrarNotificacion(mensaje) {
+    // Crear el div de la notificación
+    const notificacion = document.createElement('div');
+    notificacion.className = 'alert alert-success alert-dismissible fade show';
+    notificacion.role = 'alert';
+    notificacion.style.position = 'fixed';
+    notificacion.style.top = '20px';
+    notificacion.style.right = '20px';
+    notificacion.style.zIndex = '1000';
+    notificacion.textContent = mensaje;
+
+    // Botón para cerrar la notificación
+    const botonCerrar = document.createElement('button');
+    botonCerrar.type = 'button';
+    botonCerrar.className = 'close';
+    botonCerrar.setAttribute('data-dismiss', 'alert');
+    botonCerrar.innerHTML = '&times;';
+
+    notificacion.appendChild(botonCerrar);
+
+    // Añadir la notificación al body
+    document.body.appendChild(notificacion);
+
+    // Tiempo para que la notificación desaparezca automáticamente
+    setTimeout(() => {
+        $(notificacion).alert('close');
+    }, 3000);
+}
+
 
 
 
@@ -105,8 +134,11 @@ function crearproductocarrito(productId,cantidadSeleccionada) {
                 },
                 body: JSON.stringify(dataToSend)
             })
-                .then(response => response.json())
-                .then(data => console.log(data))
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                mostrarNotificacion('Su producto se ha agregado al carrito con éxito');
+            })
                 .catch(error => console.error('Error:', error));
 
 
