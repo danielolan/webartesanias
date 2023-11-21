@@ -1,6 +1,9 @@
 package com.ucatolica.springrestapi.service;
 
 import com.ucatolica.springrestapi.model.Purchase;
+import com.ucatolica.springrestapi.repository.PurchaseRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,4 +51,8 @@ public interface PurchaseService {
      * @return La compra actualizada.
      */
     Purchase updatePurchase(Purchase purchase);
+
+    void deleteAllPurchases();
+    
+
 }

@@ -3,6 +3,7 @@ package com.ucatolica.springrestapi.controller;
 import com.ucatolica.springrestapi.model.Purchase;
 import com.ucatolica.springrestapi.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -70,4 +71,17 @@ public class PurchaseController {
     public void deletePurchase(@RequestParam("id") Long id) {
         eService.deletePurchase(id);
     }
+
+     @Autowired
+    private PurchaseService purchaseService;
+
+    /**
+     * Elimina todas las compras.
+     */
+    @DeleteMapping("/purchase/all")
+    public ResponseEntity<?> deleteAllPurchases() {
+        purchaseService.deleteAllPurchases();
+        return ResponseEntity.ok().build();
+    }
+    
 }

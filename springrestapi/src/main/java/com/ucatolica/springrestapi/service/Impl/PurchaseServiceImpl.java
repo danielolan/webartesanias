@@ -75,4 +75,11 @@ public class PurchaseServiceImpl implements PurchaseService {
     public Purchase updatePurchase(Purchase purchase) {
         return eRepository.save(purchase);
     }
+    @Autowired
+    private PurchaseRepository purchaseRepository;
+
+    @Override
+    public void deleteAllPurchases() {
+        purchaseRepository.deleteAll();
+    }
 }
