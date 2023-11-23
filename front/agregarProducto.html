@@ -42,32 +42,40 @@
                 <form id="productForm">
                     <div class="form-group">
                         <label for="productName">Nombre de Producto:</label>
-                        <input type="text" class="form-control costume-input" id="productName" name="productName" placeholder="">
+                       
+                     <input type="text" class="form-control costume-input" id="productName" name="productName" placeholder="">
+                     <span class="error-message" style="display: none; color: red;">Debe llenar este campo</span>
                     </div>
                     <div class="form-group">
                         <label for="product_ean_code">EAN Codigo Ean</label>
                         <input type="number" class="form-control costume-input" id="product_ean_code" name="product_ean_code" placeholder="1235456">
+                        <span class="error-message" style="display: none; color: red;">Debe llenar este campo</span>
                     </div>
                     <div class="form-group">
                         <label for="product_brand">Marca:</label>
                         <input type="text" class="form-control costume-input" id="product_brand" name="product_brand" placeholder="">
+                        <span class="error-message" style="display: none; color: red;">Debe llenar este campo</span>
                     </div>
                     <div class="form-group">
                         <label for="product_description">Descripcion:</label>
                         <input type="text" class="form-control costume-input" id="product_description" name="product_description" placeholder="">
+                        <span class="error-message" style="display: none; color: red;">Debe llenar este campo</span>
                     </div>
                     <div class="form-group">
                         <label for="product_inventory">Inventario:</label>
                         <input type="number" class="form-control costume-input" id="product_inventory" name="product_inventory" placeholder="">
+                        <span class="error-message" style="display: none; color: red;">Debe llenar este campo</span>
                     </div>
                     <div class="form-group">
                         <label for="product_price">Precio:</label>
                         <input type="number" class="form-control costume-input" id="product_price" name="product_price" placeholder="3000">
+                        <span class="error-message" style="display: none; color: red;">Debe llenar este campo</span>
                     </div>
                     <div class="form-group">
                         <label for="product_image">Subir imagen:</label>
                         <input type="file" class="form-control costume-input" id="product_image" name="product_image">
-                      </div>
+                        <span class="error-message" style="display: none; color: red;">Debe llenar este campo</span> 
+                    </div>
                       
                     <div class="d-flex justify-content-center g-3">
                     <button type="submit" class="btn btn-primary button-enviar ">Agregar</button>
