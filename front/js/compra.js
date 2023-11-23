@@ -57,5 +57,27 @@ function eliminarTablaPurchase() {
     })
     .catch(error => console.error("Error al eliminar tabla purchase:", error));
 }
-
+function initMap() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+  
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: pos,
+          zoom: 15
+        });
+  
+        var marker = new google.maps.Marker({position: pos, map: map});
+      }, function() {
+        handleLocationError(true, map, map.getCenter());
+      });
+    } else {
+      // El navegador no soporta Geolocalización
+      handleLocationError(false, map, map.getCenter());
+    }
+  }
+  
 
