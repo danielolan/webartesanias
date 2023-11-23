@@ -38,6 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
         config.addAllowedMethod("POST");
         config.addAllowedMethod("PUT");
         config.addAllowedMethod("DELETE");
+        config.addAllowedMethod("PATCH"); // Añadir esta línea para permitir el método PATCH
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

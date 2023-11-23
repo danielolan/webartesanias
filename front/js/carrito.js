@@ -1,5 +1,5 @@
 const contenedorProductos = document.querySelector("#contenedor-carrito");
-
+let productosElegidosGlobal = [];
 fetch('http://localhost:8081/api/purchase')
     .then(response => response.json())
     .then(data => {
@@ -9,6 +9,7 @@ fetch('http://localhost:8081/api/purchase')
     .catch(error => console.error('Error fetching data:', error));
 
 function cargarProductosback(productosElegidos) {
+    productosElegidosGlobal = productosElegidos;
     contenedorProductos.innerHTML = "";
     let totalCompra = 0;
     productosElegidos.forEach(producto => {
@@ -88,6 +89,12 @@ document.querySelector('.carrito-acciones-vaciar').addEventListener('click', fun
     .catch(error => console.error('Error:', error));
 });
 
+document.getElementById('botonComprarAhora').addEventListener('click', function() {
+    // Guardar los productos seleccionados en localStorage antes de redirigir
+    localStorage.setItem('carrito', JSON.stringify(productosElegidosGlobal));
+console.log("tengo estos elegidos pa ", productosElegidosGlobal)
+   window.location.href = './compra.html';
+});
 
 
 

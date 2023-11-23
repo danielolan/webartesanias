@@ -51,4 +51,6 @@ public interface ProductService {
      */
     //Filtar por nombre
     List <Product> getProductsByName(String product_name);
+
+    Product updateProductInventory(Long id, Long newInventory);
 }

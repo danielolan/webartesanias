@@ -18,6 +18,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository pRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     /**
      * Obtiene la lista de todos los productos.
@@ -90,4 +92,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductsByName(String product_name) {
         return pRepository.findByProductName(product_name);
     }
+    public Product updateProductInventory(Long id, Long newInventory) {
+        Product product = productRepository.findById(id).orElseThrow(/* tu excepción aquí */);
+        product.setProduct_inventory(newInventory);
+        return productRepository.save(product);
+    }
+    
 }
