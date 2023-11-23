@@ -14,10 +14,16 @@ document.querySelector('.button-enviar').addEventListener('click', function(e) {
 
     const productosElegidos = JSON.parse(localStorage.getItem('carrito'));
     if (productosElegidos && productosElegidos.length > 0) {
-        productosElegidos.forEach(item => {
-            const productId = item.product.id;
-            const quantityPurchased = item.amount_product;
-            actualizarInventario(productId, quantityPurchased);
+        // Realizar todas las actualizaciones de inventario
+        Promise.all(productosElegidos.map(item => {
+            return actualizarInventario(item.product.id, item.amount_product);
+        })).then(() => {
+            // Todas las actualizaciones de inventario han sido exitosas
+            console.log("Todas las actualizaciones de inventario han sido exitosas");
+            // Aquí llamar a una función para eliminar todos los elementos de la tabla purchase
+            eliminarTablaPurchase();
+        }).catch(error => {
+            console.error("Error en actualización de inventario:", error);
         });
     }
 
@@ -25,16 +31,31 @@ document.querySelector('.button-enviar').addEventListener('click', function(e) {
 });
 
 function actualizarInventario(productId, quantityPurchased) {
-    fetch(`http://localhost:8081/api/products/${productId}`, {
-        method: 'PATCH', // Cambiar a PATCH
+    return fetch(`http://localhost:8081/api/products/${productId}`, {
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ product_inventory: quantityPurchased })
     })
     .then(response => response.json())
-    .then(data => console.log('Inventario actualizado para el producto:', productId))
-    .catch(error => console.error('Error:', error));
+    .then(data => console.log('Inventario actualizado para el producto:', productId));
+}
+
+function eliminarTablaPurchase() {
+    // Realizar solicitud para eliminar todos los registros en la tabla purchase
+    fetch(`http://localhost:8081/api/purchase/all`, {
+        method: 'DELETE' // Asumiendo que tienes un endpoint DELETE configurado en tu backend
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Todos los registros de purchase han sido eliminados");
+            // Aquí podrías realizar acciones adicionales como vaciar el carrito en el frontend
+        } else {
+            console.error("Error al intentar eliminar registros de purchase");
+        }
+    })
+    .catch(error => console.error("Error al eliminar tabla purchase:", error));
 }
 
 

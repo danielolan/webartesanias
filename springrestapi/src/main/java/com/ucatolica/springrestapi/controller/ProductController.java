@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +22,8 @@ import java.util.Map;
 public class ProductController {
     @Autowired
     private ProductService pService;
+    @Autowired
+    private ProductService productService;
 
     private final Path rootLocation = Paths.get("E:/arquitectura web/codigos u/webartesanias/front/img");
 
@@ -158,21 +160,136 @@ public class ProductController {
     @PatchMapping("/products/{id}")
     public ResponseEntity<Product> patchProduct(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         Product product = pService.getSingleProduct(id);
-    
+
         if (updates.containsKey("product_inventory")) {
             Object value = updates.get("product_inventory");
             Long quantityPurchased = value instanceof Integer ? ((Integer) value).longValue() : (Long) value;
-    
+
             // Restar la cantidad comprada del inventario existente
             Long newInventory = product.getProduct_inventory() - quantityPurchased;
-    
+
             // Asegurar que el inventario no sea negativo
             product.setProduct_inventory(Math.max(newInventory, 0L));
         }
-    
+
         pService.updateProduct(product);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
-    
-    
+
+    @PostMapping("/products/actions/preload")
+    public ResponseEntity<String> preloadProducts() {
+        // Crear y guardar un producto
+        // Cesto Colgante de Ratán
+        Product product1 = new Product();
+        product1.setProductName("Cesto Colgante de Ratán");
+        product1.setProduct_ean_code(101010L);
+        product1.setProduct_brand("Artesanías del Valle");
+        product1.setProduct_description(
+                "Cesto colgante tejido a mano con ratán natural, perfecto para almacenamiento decorativo.");
+        product1.setProduct_inventory(15L);
+        product1.setProduct_price(45000L);
+        product1.setProduct_image("./img/1.jpg");
+        productService.saveProduct(product1);
+
+        // Atrapasueños Marítimo
+        Product product2 = new Product();
+        product2.setProductName("Atrapasueños Marítimo");
+        product2.setProduct_ean_code(202020L);
+        product2.setProduct_brand("Sueños del Mar");
+        product2.setProduct_description(
+                "Atrapasueños con temática marina, decorado con conchas y cuentas, ideal para decoración costera.");
+        product2.setProduct_inventory(20L);
+        product2.setProduct_price(35000L);
+        product2.setProduct_image("./img/2.jpg");
+        productService.saveProduct(product2);
+
+        // Set de Platos Decorativos
+        Product product3 = new Product();
+        product3.setProductName("Set de Platos Decorativos");
+        product3.setProduct_ean_code(303030L);
+        product3.setProduct_brand("DecorArt");
+        product3.setProduct_description(
+                "Conjunto de platos decorativos de mimbre, diseñados para dar un toque artesanal a cualquier pared.");
+        product3.setProduct_inventory(10L);
+        product3.setProduct_price(60000L);
+        product3.setProduct_image("./img/3.jpg");
+        productService.saveProduct(product3);
+
+        // Atrapasueños Clásico
+        Product product4 = new Product();
+        product4.setProductName("Atrapasueños Clásico");
+        product4.setProduct_ean_code(404040L);
+        product4.setProduct_brand("Sueños Ancestrales");
+        product4.setProduct_description(
+                "Atrapasueños de estilo clásico con plumas naturales, para un sueño tranquilo y decoración del hogar.");
+        product4.setProduct_inventory(20L);
+        product4.setProduct_price(25000L);
+        product4.setProduct_image("./img/4.jpg");
+        productService.saveProduct(product4);
+
+        // Guantes Tejidos Multicolor
+        Product product5 = new Product();
+        product5.setProductName("Guantes Tejidos Multicolor");
+        product5.setProduct_ean_code(505050L);
+        product5.setProduct_brand("ColorKnit");
+        product5.setProduct_description(
+                "Guantes de lana tejidos a mano, cálidos y con un diseño colorido para alegrar los días fríos.");
+        product5.setProduct_inventory(25L);
+        product5.setProduct_price(20000L);
+        product5.setProduct_image("./img/5.jpg");
+        productService.saveProduct(product5);
+
+        // Atrapasueños Vibrante
+        Product product6 = new Product();
+        product6.setProductName("Atrapasueños Vibrante");
+        product6.setProduct_ean_code(606060L);
+        product6.setProduct_brand("VibrantDreams");
+        product6.setProduct_description(
+                "Atrapasueños con colores vibrantes y plumas, añade un toque de color y energía positiva a cualquier habitación.");
+        product6.setProduct_inventory(18L);
+        product6.setProduct_price(30000L);
+        product6.setProduct_image("./img/6.jpg");
+        productService.saveProduct(product6);
+
+        // Atrapasueños Minimalista
+        Product product7 = new Product();
+        product7.setProductName("Atrapasueños Minimalista");
+        product7.setProduct_ean_code(707070L);
+        product7.setProduct_brand("MinimalDream");
+        product7.setProduct_description(
+                "Atrapasueños minimalista con un diseño sencillo y elegante, ideal para la decoración moderna del hogar.");
+        product7.setProduct_inventory(22L);
+        product7.setProduct_price(28000L);
+        product7.setProduct_image("./img/7.jpg");
+        productService.saveProduct(product7);
+
+        // Alfarería Tradicional
+        Product product8 = new Product();
+        product8.setProductName("Alfarería Tradicional");
+        product8.setProduct_ean_code(808080L);
+        product8.setProduct_brand("ClayCraft");
+        product8.setProduct_description(
+                "Piezas de alfarería hechas a mano por artesanos locales, con diseños y pinturas tradicionales.");
+        product8.setProduct_inventory(8L);
+        product8.setProduct_price(50000L);
+        product8.setProduct_image("./img/8.jpg");
+        productService.saveProduct(product8);
+
+        // Maceta de Cerámica Pintada
+        Product product9 = new Product();
+        product9.setProductName("Maceta de Cerámica Pintada");
+        product9.setProduct_ean_code(909090L);
+        product9.setProduct_brand("CeramicGarden");
+        product9.setProduct_description(
+                "Macetas de cerámica pintadas a mano, cada una con un diseño único para realzar tus plantas.");
+        product9.setProduct_inventory(12L);
+        product9.setProduct_price(40000L);
+        product9.setProduct_image("./img/9.jpg");
+        productService.saveProduct(product9);
+
+        // Continuar agregando más productos si es necesario
+
+        return ResponseEntity.ok("Productos pre-cargados con éxito");
+    }
+
 }

@@ -6,6 +6,9 @@ const tituloPrincipal = document.querySelector("#titulo-principal");
 let currentPage = 1;
 const itemsPerPage = 8;
 let totalItems;
+document.addEventListener('DOMContentLoaded', function() {
+    actualizarCantidadCarrito();
+});
 
 fetch('http://localhost:8081/api/products')
     .then(response => response.json())
@@ -231,3 +234,17 @@ inputBuscar.addEventListener('input', function() {
         .catch(error => console.error('Error fetching data:', error));
 });
 
+// Función para actualizar la cantidad de elementos en el carrito
+function actualizarCantidadCarrito() {
+    fetch('http://localhost:8081/api/purchase')
+        .then(response => response.json())
+        .then(data => {
+            // Actualizar el elemento con la cantidad de elementos en el carrito
+            const cantidadCarrito = data.length; // Suponiendo que data es un array de elementos purchase
+            document.querySelector('.numerito').textContent = cantidadCarrito;
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+// Llamar a la función cuando se carga la página
+document.addEventListener('DOMContentLoaded', actualizarCantidadCarrito);
