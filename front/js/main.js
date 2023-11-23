@@ -213,26 +213,22 @@ const inputBuscar = document.getElementById('input-buscar');
 // Asegúrate de que este ID exista en tu HTML
 
 // Evento para detectar cuando el usuario escribe en el campo de búsqueda
+// Evento para detectar cuando el usuario escribe en el campo de búsqueda
 inputBuscar.addEventListener('input', function() {
-    const textoBusqueda = inputBuscar.value.toLowerCase(); // Convertir el texto a minúsculas para una búsqueda no sensible a mayúsculas/minúsculas
-
-    fetch('http://localhost:8081/api/products')
-        .then(response => response.json())
-        .then(data => {
-            // Filtrar los productos basados en el texto de búsqueda y los campos mencionados
-            const productosFiltrados = data.filter(producto => 
-                producto.productName.toLowerCase().includes(textoBusqueda) ||
-                producto.product_ean_code.toString().includes(textoBusqueda) ||
-                producto.id.toString().includes(textoBusqueda) ||
-                producto.product_brand.toLowerCase().includes(textoBusqueda) ||
-                producto.product_description.toLowerCase().includes(textoBusqueda) ||
-                producto.product_inventory.toString().includes(textoBusqueda) ||
-                producto.product_price.toString().includes(textoBusqueda)
-            );
-            cargarProductosback(productosFiltrados);
-        })
-        .catch(error => console.error('Error fetching data:', error));
+    const textoBusqueda = inputBuscar.value.toLowerCase();
+    const productosFiltrados = productosElegidos.filter(producto => 
+        producto.productName.toLowerCase().includes(textoBusqueda) ||
+        producto.product_ean_code.toString().includes(textoBusqueda) ||
+        producto.id.toString().includes(textoBusqueda) ||
+        producto.product_brand.toLowerCase().includes(textoBusqueda) ||
+        producto.product_description.toLowerCase().includes(textoBusqueda) ||
+        producto.product_inventory.toString().includes(textoBusqueda) ||
+        producto.product_price.toString().includes(textoBusqueda)
+    );
+    cargarProductosback(productosFiltrados, 1); // Siempre comenzar en la página 1 al filtrar
+    crearPaginacion(productosFiltrados.length); // Crear paginación basada en productos filtrados
 });
+
 
 // Función para actualizar la cantidad de elementos en el carrito
 function actualizarCantidadCarrito() {
