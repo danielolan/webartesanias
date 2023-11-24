@@ -19,7 +19,7 @@ document.getElementById('productForm').addEventListener('submit', function(event
     if (isValid) {
         const formData = new FormData(event.target);
         // No establezcas 'Content-Type' manualmente para 'multipart/form-data'
-        fetch('http://localhost:8081/api/products/upload', { // Actualiza esta URL
+        fetch('http://localhost:8081/api/products/add', { // Actualiza esta URL
             method: 'POST',
             body: formData
         })

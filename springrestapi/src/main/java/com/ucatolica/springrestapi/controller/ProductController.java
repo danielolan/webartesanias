@@ -58,11 +58,11 @@ public class ProductController {
      * @return ResponseEntity con el producto guardado y el estado HTTP CREATED.
      */
     // localhost:8081/api/products - Guarda la información de un nuevo producto.
-    @PostMapping("/products")
+   /*  @PostMapping("/products")
     public ResponseEntity<Product> saveProduct(@Valid @RequestBody Product product) {
         return new ResponseEntity<>(pService.saveProduct(product), HttpStatus.CREATED);
     }
-
+*/
     /**
      * Actualiza la información de un producto existente.
      * 
@@ -92,7 +92,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/products/upload")
+    @PostMapping("/products/add")
     public ResponseEntity<Product> handleFileUpload(@RequestParam("product_image") MultipartFile file,
             @RequestParam("productName") String productName,
             @RequestParam("product_ean_code") Long productEanCode,
