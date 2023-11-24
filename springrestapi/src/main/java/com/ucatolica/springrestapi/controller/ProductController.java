@@ -51,18 +51,8 @@ public class ProductController {
         return new ResponseEntity<>(pService.getSingleProduct(id), HttpStatus.OK);
     }
 
-    /**
-     * Guarda la información de un nuevo producto.
-     * 
-     * @param product El producto a guardar.
-     * @return ResponseEntity con el producto guardado y el estado HTTP CREATED.
-     */
-    // localhost:8081/api/products - Guarda la información de un nuevo producto.
-   /*  @PostMapping("/products")
-    public ResponseEntity<Product> saveProduct(@Valid @RequestBody Product product) {
-        return new ResponseEntity<>(pService.saveProduct(product), HttpStatus.CREATED);
-    }
-*/
+
+
     /**
      * Actualiza la información de un producto existente.
      * 
@@ -91,7 +81,13 @@ public class ProductController {
         pService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
+    /**
+     * Guarda la información de un nuevo producto.
+     * 
+     * @param product El producto a guardar.
+     * @return ResponseEntity con el producto guardado y el estado HTTP CREATED.
+     */
+    // localhost:8081/api/products - Guarda la información de un nuevo producto.
     @PostMapping("/products/add")
     public ResponseEntity<Product> handleFileUpload(@RequestParam("product_image") MultipartFile file,
             @RequestParam("productName") String productName,
@@ -145,18 +141,7 @@ public class ProductController {
         return new ResponseEntity<>(pService.getProductsByName(product_name), HttpStatus.OK);
     }
 
-    @PutMapping("/products/{id}/updateInventory")
-    public ResponseEntity<Product> updateProductInventory(@PathVariable Long id, @RequestBody Product product) {
-        // Obtener el producto actual de la base de datos
-        Product existingProduct = pService.getSingleProduct(id);
-
-        // Actualizar la cantidad de inventario
-        existingProduct.setProduct_inventory(existingProduct.getProduct_inventory() - product.getProduct_inventory());
-
-        // Guardar el producto actualizado
-        return new ResponseEntity<>(pService.updateProduct(existingProduct), HttpStatus.OK);
-    }
-
+// Hace un cambio de registro sin enviar todo el producto
     @PatchMapping("/products/{id}")
     public ResponseEntity<Product> patchProduct(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         Product product = pService.getSingleProduct(id);
