@@ -37,8 +37,8 @@ fetch('http://localhost:8081/api/products')
                 <img class="producto-imagen" src="${producto.product_image}" alt="${producto.productName}">
                 <div class="producto-detalles">
                     <h3 class="producto-titulo">${producto.productName}</h3>
-                    <p class="producto-precio">${producto.product_price}</p>
-                    <button class="producto-agregar" id="${producto.id}">Agregar</button>
+                    <p class="producto-precio">$ ${producto.product_price}</p>
+                    <button class="producto-agregar" id="${producto.id}">Detalles</button>
                 </div>
             `;
     

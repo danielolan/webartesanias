@@ -63,7 +63,7 @@ function cargarProducto(producto) {
     <p class="my-2"><strong>Marca:</strong> ${producto.product_brand}</p>
     <p class="my-2"><strong>Descripción:</strong> ${producto.product_description}</p>
     <p class="unidades-disponibles my-2">${producto.product_inventory} unidades disponibles</p>
-    <p class="precio-text my-2"><strong>Precio:</strong> $${producto.product_price}</p>
+    <p class="precio-text my-2"><strong>Precio:</strong> $ ${producto.product_price}</p>
         <div class="d-flex align-items-center my-4">
             <select class="form-select" id="cantidadProducto">
                 ${Array.from({ length: producto.product_inventory }, (_, i) =>
