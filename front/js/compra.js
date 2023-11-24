@@ -28,7 +28,7 @@ document.querySelector('.button-enviar').addEventListener('click', function(e) {
         })).then(() => {
             // Todas las actualizaciones de inventario han sido exitosas
             console.log("Todas las actualizaciones de inventario han sido exitosas");
-            mostrarNotificacion('Su compra se ha realizado con Exxito');
+            mostrarNotificacion('Su compra se ha realizado con Exito');
             
             // Aquí llamar a una función para eliminar todos los elementos de la tabla purchase
             eliminarTablaPurchase();
